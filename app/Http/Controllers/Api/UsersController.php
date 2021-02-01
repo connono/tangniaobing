@@ -23,7 +23,7 @@ class UsersController extends Controller
         }
 
         $user = User::create([
-            'phoneNumber' => $verifyData['phone'],
+            'phoneNumber' => $verifyData['phoneNumber'],
             'password' => $request->password,
         ]);
 

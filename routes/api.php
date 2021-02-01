@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\VerificationCodesController;
 use App\Http\Controllers\Api\UsersController;
+use App\Http\Controllers\Api\CaptchasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,5 @@ Route::prefix('v1')
         // 短信验证码
         Route::post('verificationCodes', [VerificationCodesController::class, 'store']);
         Route::post('users', [UsersController::class, 'store']);
+        Route::post('captchas', [CaptchasController::class, 'store']);
 });
