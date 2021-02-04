@@ -24,7 +24,7 @@ class UsersController extends Controller
 
         $user = User::create([
             'phoneNumber' => $verifyData['phoneNumber'],
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
         ]);
 
         Cache::forget($request->verification_key);

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\VerificationCodesController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\CaptchasController;
+use App\Http\Controllers\Api\AuthorizationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,12 @@ Route::prefix('v1')
         })->name('version');
         // 短信验证码
         Route::post('verificationCodes', [VerificationCodesController::class, 'store']);
+        // 注册用户
         Route::post('users', [UsersController::class, 'store']);
+        // 图片验证码
         Route::post('captchas', [CaptchasController::class, 'store']);
+        // 获取 JWT token
+        Route::post('authorizations', [AuthorizationsController::class, 'store']);
+        Route::put('authorizations/current', [AuthorizationsController::class, 'update']);
+        Route::delete('authorizations/current', [AuthorizationsController::class, 'destroy']);
 });
