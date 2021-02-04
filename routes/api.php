@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\VerificationCodesController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\CaptchasController;
 use App\Http\Controllers\Api\AuthorizationsController;
+use App\Http\Controllers\Api\InformationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,9 @@ Route::prefix('v1')
         Route::post('authorizations', [AuthorizationsController::class, 'store']);
         Route::put('authorizations/current', [AuthorizationsController::class, 'update']);
         Route::delete('authorizations/current', [AuthorizationsController::class, 'destroy']);
+
+        Route::middleware('auth:api')->group(function() {
+            Route::get('user', [UsersController::class, 'show']);
+            Route::post('information', [InformationController::class, 'store']);
+        });
 });

@@ -31,4 +31,9 @@ class UsersController extends Controller
 
         return new UserResource($user);
     }
+
+    public function show(Request $request)
+    {
+        return new UserResource($request->user());
+    }
 }
