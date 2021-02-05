@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Information extends Model
+class BloodGlucose extends Model
 {
     use HasFactory;
 
+    protected $table = 'blood_glucose';
+
     protected $fillable = [
-        'sex',
-        'height',
-        'age',
-        'weight',
-        'complication',
-        'profession',
-        'sports',
+        'blood_glucose',
+        'type'
     ];
 }

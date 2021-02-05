@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\VerificationCodesController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\CaptchasController;
 use App\Http\Controllers\Api\AuthorizationsController;
 use App\Http\Controllers\Api\InformationController;
+use App\Http\Controllers\Api\BloodGlucoseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +42,14 @@ Route::prefix('v1')
         Route::delete('authorizations/current', [AuthorizationsController::class, 'destroy']);
 
         Route::middleware('auth:api')->group(function() {
+
             Route::get('user', [UsersController::class, 'show']);
+            
             Route::post('information', [InformationController::class, 'store']);
+            Route::patch('information', [InformationController::class, 'update']);
+            Route::get('information', [InformationController::class, 'show']);
+
+            Route::post('blood_glucose', [BloodGlucoseController::class, 'store']);
+            Route::get('blood_glucose', [BloodGlucoseController::class, 'show']);
         });
 });

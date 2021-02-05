@@ -15,16 +15,22 @@ class CreateInformationTable extends Migration
     {
         Schema::create('information', function (Blueprint $table) {
             $table->id();
+            // user id
             $table->bigInteger('user_id')->index();
-            $table->string('phoneNumber');
-            $table->enum('sex', ['男', '女']);
+            // 性别 0为男 1为女
+            $table->enum('sex', ['0', '1']);
+            // 身高
             $table->integer('height');
+            // 年龄
             $table->integer('age');
+            // 体重
             $table->integer('weight');
+            // 合并症 以标志位为准
             $table->binary('complication');
+            // 职业
             $table->string('profession');
+            // 运动情况
             $table->enum('sports', ['1', '2', '3']);
-            $table->string('bg');
             $table->timestamps();
         });
     }

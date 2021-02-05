@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\InformationRequest;
 use App\Http\Resources\InformationResource;
 use App\Models\Information;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InformationController extends Controller
 {
@@ -14,7 +14,6 @@ class InformationController extends Controller
     {
         $user = $request->user();
         $information->user_id = $user->id;
-        $information->phoneNumber = $request->phoneNumber;
         $information->sex = $request->sex;
         $information->height = $request->height;
         $information->age = $request->age;
@@ -22,8 +21,27 @@ class InformationController extends Controller
         $information->complication = $request->complication;
         $information->profession = $request->profession;
         $information->sports = $request->sports;
-        $information->bg = $request->bg;
-        $information->save();
+        $user->information()->save($information);
         return new InformationResource($information);
+    }
+
+    public function update(InformationRequest $request, Information $information)
+    {
+        $user = $request->user();
+        
+        $attributes = $request->only([
+            'sex', 'height', 'age', 'weight', 'complication', 'profession', 'sports'
+        ]);
+
+        $user->information()->update($attributes);
+
+        return new InformationResource($user->information()->get());
+    }
+
+    public function show()
+    {
+        $user = Auth::user();
+
+        return new InformationResource($user->information()->get());
     }
 }
