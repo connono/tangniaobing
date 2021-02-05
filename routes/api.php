@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CaptchasController;
 use App\Http\Controllers\Api\AuthorizationsController;
 use App\Http\Controllers\Api\InformationController;
 use App\Http\Controllers\Api\BloodGlucoseController;
+use App\Http\Controllers\Api\FoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,5 +52,10 @@ Route::prefix('v1')
 
             Route::post('blood_glucose', [BloodGlucoseController::class, 'store']);
             Route::get('blood_glucose', [BloodGlucoseController::class, 'show']);
+
+            Route::get('food', [FoodController::class, 'show']);
+            Route::post('food', [FoodController::class, 'store']);
+            Route::patch('food', [FoodController::class, 'update']);
+            Route::delete('food', [FoodController::class, 'delete']);
         });
 });
