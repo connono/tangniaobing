@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\AuthorizationsController;
 use App\Http\Controllers\Api\InformationController;
 use App\Http\Controllers\Api\BloodGlucoseController;
 use App\Http\Controllers\Api\FoodController;
+use App\Http\Controllers\Api\ComplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,5 +58,10 @@ Route::prefix('v1')
             Route::post('food', [FoodController::class, 'store']);
             Route::patch('food', [FoodController::class, 'update']);
             Route::delete('food', [FoodController::class, 'delete']);
+
+            Route::get('complication', [ComplicationController::class, 'show']);
+            Route::post('complication', [ComplicationController::class, 'store']);
+            Route::patch('complication', [ComplicationController::class, 'update']);
+            Route::delete('complication', [ComplicationController::class, 'delete']);
         });
 });
