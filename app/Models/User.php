@@ -54,4 +54,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\Models\BloodGlucose');
     }
+
+    public function Recipe()
+    {
+        return $this->hasOne('App\Models\Recipe');
+    }
 }
