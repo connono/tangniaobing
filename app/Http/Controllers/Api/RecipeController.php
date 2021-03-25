@@ -100,12 +100,22 @@ class RecipeController extends Controller
         // rule1: 早餐只有 cereal beanProduct meat
         //        中餐有   cereal beanProduct meat vegetable fruit grease
         //        晚餐有   cereal meat vegetable fruit grease 
-        $vegetables = DB::table("foods")->where('type', 'vegetable')->orderBy('gi')->take(2)->get(['name', 'g'])->toArray();
-        $fruits = DB::table("foods")->where('type', 'fruit')->orderBy('gi')->take(2)->get(['name', 'g'])->toArray();
-        $cereals = DB::table("foods")->where('type', 'cereal')->orderBy('gi')->take(3)->get(['name', 'g'])->toArray();
-        $beanProducts = DB::table("foods")->where('type', 'beanProduct')->orderBy('gi')->take(2)->get(['name', 'g'])->toArray();
-        $greases = DB::table("foods")->where('type', 'grease')->orderBy('gi')->take(2)->get(['name', 'g'])->toArray();
-        $meats = DB::table("foods")->where('type', 'meat')->orderBy('gi')->take(3)->get(['name', 'g'])->toArray();
+        $complicationList = explode(',', $information->value('complication'));
+        $complications = DB::table('complication')->whereIn('name', $complicationList)->get();
+        // 禁食列表
+        $foods = [];
+        foreach($complications as $complication){
+            $foodsi = DB::table('food_complication')->whereIn('complication_id', [$complication->id])->get();
+            foreach($foodsi as $foodi){
+                array_push($foods, $foodi->food_id);
+            }
+        }
+        $vegetables = DB::table("foods")->where('type', 'vegetable')->whereNotIn('id', $foods)->orderBy('gi')->take(2)->get(['name', 'g'])->toArray();
+        $fruits = DB::table("foods")->where('type', 'fruit')->whereNotIn('id', $foods)->orderBy('gi')->take(2)->get(['name', 'g'])->toArray();
+        $cereals = DB::table("foods")->where('type', 'cereal')->whereNotIn('id', $foods)->orderBy('gi')->take(3)->get(['name', 'g'])->toArray();
+        $beanProducts = DB::table("foods")->where('type', 'beanProduct')->whereNotIn('id', $foods)->orderBy('gi')->take(2)->get(['name', 'g'])->toArray();
+        $greases = DB::table("foods")->where('type', 'grease')->whereNotIn('id', $foods)->orderBy('gi')->take(2)->get(['name', 'g'])->toArray();
+        $meats = DB::table("foods")->where('type', 'meat')->whereNotIn('id', $foods)->orderBy('gi')->take(3)->get(['name', 'g'])->toArray();
         // 7. 组合形成处方        
         $breakfastCereal = $cereals[0]->name . " " . round($cereals[0]->g * $cerealNum * 0.2) . "g";
         $lunchCereal = $cereals[1]->name . " " . round($cereals[1]->g * $cerealNum * 0.4) . "g";

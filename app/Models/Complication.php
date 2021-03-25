@@ -14,4 +14,9 @@ class Complication extends Model
     ];
 
     protected $table = 'complication';
+
+    public function foods()
+    {
+        return $this->belongsToMany('App\Models\Food', 'food_complication', 'food_id', 'complication_id');
+    }
 }

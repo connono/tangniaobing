@@ -64,6 +64,7 @@ Route::prefix('v1')
             Route::post('complication', [ComplicationController::class, 'store']);
             Route::patch('complication', [ComplicationController::class, 'update']);
             Route::delete('complication', [ComplicationController::class, 'delete']);
+            Route::get('complication/food', [ComplicationController::class, 'food']);
 
             Route::get('recipeStore', [RecipeController::class, 'store']);
             Route::get('recipe', [RecipeController::class, 'show']);

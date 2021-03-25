@@ -21,7 +21,7 @@ class InformationRequest extends FormRequest
             'height' => 'required|integer',
             'age' => 'required|integer',
             'weight' => 'required|integer',
-            'complication' => 'required|integer',
+            'complication' => 'required|string',
             'profession' => 'required|string',
             'sports' => [
                 'required',

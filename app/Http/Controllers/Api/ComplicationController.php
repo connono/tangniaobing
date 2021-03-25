@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ComplicationRequest;
 use App\Models\Complication;
 use App\Http\Resources\ComplicationResource;
+use App\Http\Resources\FoodResource;
 
 class ComplicationController extends Controller
 {
@@ -40,5 +41,13 @@ class ComplicationController extends Controller
     public function show()
     {
         return new ComplicationResource(Complication::all());
+    }
+
+    public function food(ComplicationRequest $request, Complication $complication)
+    {
+        $complication = Complication::find($request->id);
+        
+        $foods = $complication->foods()->get();
+        return [$foods];
     }
 }

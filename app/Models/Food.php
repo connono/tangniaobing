@@ -19,4 +19,9 @@ class Food extends Model
         'axunge',
         'protein'
     ];
+
+    public function complications()
+    {
+        return $this->belongsToMany('App\Models\Complication', 'food_complication', 'food_id', 'complication_id');
+    }
 }

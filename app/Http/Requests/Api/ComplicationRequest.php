@@ -27,6 +27,10 @@ class ComplicationRequest extends FormRequest
                 return [
                     'id' => 'required|integer',
                 ];
+            case 'GET':
+                return [
+                    'id' => 'integer'
+                ];
         }
     }
 
